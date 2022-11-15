@@ -17,10 +17,13 @@ interface TMDBApi {
     companion object {
         var TmdbApi : TMDBApi? = null
         fun getInstance() : TMDBApi {
-            return Retrofit.Builder()
-                .baseUrl("https://api.themoviedb.org/3/")
-                .addConverterFactory(MoshiConverterFactory.create())
-                .build().create(TMDBApi::class.java)
+            if (TmdbApi == null) {
+                TmdbApi = Retrofit.Builder()
+                    .baseUrl("https://api.themoviedb.org/3/")
+                    .addConverterFactory(MoshiConverterFactory.create())
+                    .build().create(TMDBApi::class.java)
+            }
+            return TmdbApi!!
         }
     }
 }
