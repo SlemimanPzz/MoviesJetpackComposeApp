@@ -1,9 +1,7 @@
-package me.pzz.codechallengeluxsoft.movie
-import me.pzz.luxoftcodechallenge.movie.Movie
-import retrofit2.Call
+package me.pzz.codechallengeluxsoft.movie.api
+import me.pzz.codechallengeluxsoft.movie.data.Movie
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.create
 import  retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

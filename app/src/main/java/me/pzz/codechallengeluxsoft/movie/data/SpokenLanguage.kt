@@ -1,4 +1,4 @@
-package me.pzz.luxoftcodechallenge.movie
+package me.pzz.codechallengeluxsoft.movie.data
 
 data class SpokenLanguage(
     val iso_639_1: String,

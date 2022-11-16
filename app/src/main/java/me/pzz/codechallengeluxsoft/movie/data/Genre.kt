@@ -1,4 +1,4 @@
-package me.pzz.luxoftcodechallenge.movie
+package me.pzz.codechallengeluxsoft.movie.data
 
 data class Genre(
     val id: Int,
