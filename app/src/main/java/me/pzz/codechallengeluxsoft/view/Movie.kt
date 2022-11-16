@@ -46,11 +46,12 @@ fun movie(movie : Movie){
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Text(
-                            text = movie.title,
+                            text = movie.title.take(20),
                             style = MaterialTheme.typography.subtitle1,
                             fontWeight = FontWeight.Bold,
                             fontSize = 18.sp,
-                            overflow = TextOverflow.Ellipsis
+                            overflow = TextOverflow.Ellipsis,
+                            maxLines = 1
                         )
                         Row {
                             Text(text = "ID:", fontWeight = FontWeight.Light)
@@ -58,7 +59,8 @@ fun movie(movie : Movie){
                                 text = movie.id.toString(),
                                 style = MaterialTheme.typography.body1,
                                 fontWeight = FontWeight.W100,
-                                fontStyle = FontStyle.Italic
+                                fontStyle = FontStyle.Italic,
+                                maxLines = 1
                             )
                         }
                     }

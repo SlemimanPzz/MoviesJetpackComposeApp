@@ -28,17 +28,18 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .padding(top = 15.dp, start = 10.dp, end = 10.dp),
+                        .fillMaxSize(),
                     color = MaterialTheme.colors.background
 
                 ) {
-                    mainView(movieList = moviesManager.movies, {moviesManager.addMovies(it)}, {moviesManager.removeMovie(it)})
+                    mainView(movieList = moviesManager.movies, {moviesManager.addMovies(it)}, {moviesManager.removeMovie(it)}, {moviesManager.sort(it)})
                 }
             }
         }
     }
 }
+
+
 
 
 @Preview(showBackground = true)

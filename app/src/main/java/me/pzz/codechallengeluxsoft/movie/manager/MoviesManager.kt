@@ -11,12 +11,17 @@ import java.lang.Exception
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
 import me.pzz.codechallengeluxsoft.movie.api.TMDBApi
-import me.pzz.codechallengeluxsoft.view.movie
+import kotlin.Comparator
+
 
 class MoviesManager : ViewModel() {
     var movies by mutableStateOf(listOf<Movie>())
     var errorMessage : String by mutableStateOf("")
 
+
+    fun sort(comparator: Comparator<in Movie>){
+        movies = movies.sortedWith(comparator)
+    }
 
     fun removeMovie(movie_ids: String){
         viewModelScope.launch {
@@ -28,13 +33,7 @@ class MoviesManager : ViewModel() {
         }
     }
 
-    fun removeMovie(index :Int = -1){
-        viewModelScope.launch {
-            movies = movies.dropLast(1)
-        }
-    }
-
-    fun addMovies(movie_ids : String) {
+    fun addMovies(movie_ids : String = "7459, 414906, 680, 120, 121, 122, 10501, 9837, 152601, 105, 813") {
         viewModelScope.launch {
             val apiService = TMDBApi.getInstance()
             val ids = movie_ids.split(",")
@@ -50,6 +49,7 @@ class MoviesManager : ViewModel() {
                     Log.d("Error","Aqui salio algo mal")
                     e.message
                 }
+                Thread.sleep(100)
             }
 
         }
