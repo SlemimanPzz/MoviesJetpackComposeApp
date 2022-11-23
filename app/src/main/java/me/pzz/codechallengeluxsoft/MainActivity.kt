@@ -4,30 +4,22 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import me.pzz.codechallengeluxsoft.movie.MoviesManager
+import androidx.compose.ui.unit.dp
+import me.pzz.codechallengeluxsoft.movie.manager.MoviesManager
 import me.pzz.codechallengeluxsoft.ui.theme.CodeChallengeLuxsoftTheme
-import me.pzz.luxoftcodechallenge.movie.Movie
+import me.pzz.codechallengeluxsoft.movie.data.*
+import me.pzz.codechallengeluxsoft.view.mainView
+import me.pzz.codechallengeluxsoft.view.movie
+
 
 class MainActivity : ComponentActivity() {
 
-
-    val api = BuildConfig.API_KEY
-
     val moviesManager by viewModels<MoviesManager>()
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,14 +27,12 @@ class MainActivity : ComponentActivity() {
             CodeChallengeLuxsoftTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier
+                        .fillMaxSize(),
                     color = MaterialTheme.colors.background
+
                 ) {
-                    Column{
-                        Greeting(api)
-                        movieList(movieList = moviesManager.movies)
-                    }
-                    moviesManager.getMovies()
+                    mainView(movieList = moviesManager.movies, {moviesManager.addMovies(it)}, {moviesManager.removeMovie(it)}, {moviesManager.sort(it)})
                 }
             }
         }
@@ -50,31 +40,31 @@ class MainActivity : ComponentActivity() {
 }
 
 
-@Composable
-fun movieList(movieList: List<Movie>){
-    LazyColumn {
-        items(movieList) { movie ->
-            movie(movie)
-        }
-    }
-}
 
-@Composable
-fun movie(movie : Movie){
-    Text(text = movie.title)
-}
-
-@Composable
-fun Greeting(name: String) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
-        Text(text = "Hello $name!")
-    }
-}
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     CodeChallengeLuxsoftTheme {
-        Greeting("Android")
+        movie(movie = Movie(
+            budget = 1000,
+            genres = listOf(Genre(1, "Testing")),
+            homepage = "https://localhost",
+            id = 550,
+            original_language = "es",
+            original_title = "Test",
+            overview = "Testong overview of a movie.",
+            poster_path = null,
+            production_companies = listOf(ProductionCompany(1, null, "Testing Productions", "Mexico")),
+            production_countries = listOf(ProductionCountry("mx", "Mexico")),
+            release_date = "2022-11-15",
+            revenue = 1000,
+            runtime = 120,
+            spoken_languages = listOf(SpokenLanguage("es","Spanish")),
+            status = "ok",
+            title = "Testing Movie",
+            vote_average = 7.5,
+            vote_count = 30
+        ))
     }
 }

@@ -1,4 +1,4 @@
-package me.pzz.luxoftcodechallenge.movie
+package me.pzz.codechallengeluxsoft.movie.data
 
 data class Movie(
     val budget: Int,
